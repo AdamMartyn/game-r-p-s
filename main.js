@@ -20,9 +20,9 @@ scissors.addEventListener('click', function() {
 });
 
 
-var playerMove = function(playerChoisce) {
+var playerMove = function(playerChoice) {
     var com = computerChoice();
-    parallel(playerChoisce, com);
+    parallel(playerChoice, com);
 
     if (leftRound === 0) {
         rock.disabled = true;
