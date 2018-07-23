@@ -1,3 +1,4 @@
+"use strict"
 var newGame = document.getElementById('new-game');
 var leftRound = document.getElementById('round');
 var resultMsg = document.getElementById('result');
@@ -8,16 +9,27 @@ var rock = document.getElementById('r');
 var paper = document.getElementById('p');
 var scissors = document.getElementById('s');
 
+rock.disabled = true;
+paper.disabled = true;
+scissors.disabled = true;
 
 rock.addEventListener('click', function() {
     playerMove('rock');
 });
 paper.addEventListener('click', function() {
-    playerMove(paper);
+    playerMove('paper');
 });
 scissors.addEventListener('click', function() {
-    playerMove(scissors);
+    playerMove('scissors');
 });
+
+var final = function() {
+    if (userScore > computerScore) {
+        document.getElementById('board').classList.add('score-board-green');
+    } else if (userScore < computerScore) {
+        document.getElementById('board').classList.add('score-board-red');
+    }
+};
 
 
 var playerMove = function(playerChoice) {
@@ -25,21 +37,13 @@ var playerMove = function(playerChoice) {
     parallel(playerChoice, com);
 
     if (leftRound === 0) {
-        rock.disabled = true;
-        paper.disabled = true;
-        scissors.disabled = true;
-        if (userScore > computerScore) {
-            document.getElementById('board').classList.add('score-board-green');
-        } else if (userScore < computerScore) {
-            document.getElementById('board').classList.add('score-board-red');
-        }
-
+        final();
     }
 };
 var computerChoice = function() {
     var choice;
     var randomNum = Math.floor(Math.random() * 3 + 1);
-
+    console.log(randomNum);
     if (randomNum === 1) {
         choice = 'paper';
     } else if (randomNum === 2) {
@@ -68,10 +72,10 @@ var parallel = function(playerChoice, computerChoice) {
 
 
 var reset = function() {
-    leftRound.innerHTML = "";
-    resultMsg.innerHTML = "";
+    leftRound.innerHTML = 0;
+    resultMsg.innerHTML = 'start game';
     userScore.innerHTML = 0;
-    computerScore.innerHtml = 0;
+    computerScore.innerHTML = 0;
     rock.disabled = false;
     paper.disabled = false;
     scissors.disabled = false;
