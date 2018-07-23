@@ -40,6 +40,7 @@ var playerMove = function(playerChoice) {
         final();
     }
 };
+
 var computerChoice = function() {
     var choice;
     var randomNum = Math.floor(Math.random() * 3 + 1);
@@ -72,7 +73,7 @@ var parallel = function(playerChoice, computerChoice) {
 
 
 var reset = function() {
-    leftRound.innerHTML = 0;
+    leftRound.innerHTML = 'number of rounds!'
     resultMsg.innerHTML = 'start game';
     userScore.innerHTML = 0;
     computerScore.innerHTML = 0;
