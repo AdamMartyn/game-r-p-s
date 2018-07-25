@@ -8,6 +8,7 @@ var computerScore = document.getElementById('computer-score');
 var rock = document.getElementById('r');
 var paper = document.getElementById('p');
 var scissors = document.getElementById('s');
+var countRound = 0;
 
 rock.disabled = true;
 paper.disabled = true;
@@ -23,36 +24,20 @@ scissors.addEventListener('click', function() {
     playerMove('scissors');
 });
 
-/*var final = function() {
-    /*    if (userScore > computerScore) {
-            document.getElementById('board').classList.add('score-board-green');
-        } else if (userScore < computerScore) {
-            document.getElementById('board').classList.add('score-board-red');
-        }
-    rock.disabled = true;
-    paper.disabled = true;
-    scissors.disabled = true;
-};*/
-var finitoGame = function() {
-    if (leftRound === 0) {
-        rock.disabled = true;
-        paper.disabled = true;
-        scissors.disabled = true;
-    }
-}
+
+/*    if (userScore > computerScore) {
+        document.getElementById('board').classList.add('score-board-green');
+    } else if (userScore < computerScore) {
+        document.getElementById('board').classList.add('score-board-red');
+    }*/
+
+
+
+
 
 var playerMove = function(playerChoice) {
     var com = computerChoice();
     parallel(playerChoice, com);
-
-    finitoGame(leftRound);
-
-    /*    var roundFi = leftRound;
-        if (roundFi === 0) {
-            rock.disabled = true;
-            paper.disabled = true;
-            scissors.disabled = true;
-        }*/
 };
 
 var computerChoice = function() {
@@ -77,19 +62,22 @@ var parallel = function(playerChoice, computerChoice) {
     } else if ((playerChoice === 'paper') && (computerChoice === 'rock') || ((playerChoice === 'rock') && (computerChoice === 'scissors')) || ((playerChoice === 'scissors') && (computerChoice === 'paper'))) {
         resultMsg.innerHTML = 'You won';
         userScore.innerHTML++;
+        countRound += 1;
         leftRound.innerHTML--;
     } else if ((computerChoice === 'paper') && (playerChoice === 'rock') || ((computerChoice === 'rock') && (playerChoice === 'scissors')) || ((computerChoice === 'scissors') && (playerChoice === 'paper'))) {
         resultMsg.innerHTML = 'You lost';
         computerScore.innerHTML++;
+        countRound += 1;
         leftRound.innerHTML--;
     }
+    console.log(countRound);
 };
 
 
 
 var reset = function() {
     //    leftRound.innerHTML = 'number of rounds!'
-    resultMsg.innerHTML = 'start game';
+    resultMsg.innerHTML = 'start game' + '<br>';
     userScore.innerHTML = 0;
     computerScore.innerHTML = 0;
     rock.disabled = false;
@@ -101,8 +89,8 @@ var reset = function() {
 
 newGame.addEventListener('click', function() {
     reset();
-    var numbRound = window.prompt('how many times do you want to play?  -  type number');
-    if (isNaN(numbRound) || (numbRound === '') || (numbRound === null)) {
+    var numbRound = window.prompt('how many times do you want to play?  - enter a number greater than zero');
+    if (isNaN(numbRound) || (numbRound === '') || (numbRound === null) || (numbRound === '-1')) {
         resultMsg.innerHTML = 'Just type number remember';
         rock.disabled = true;
         paper.disabled = true;
@@ -113,4 +101,14 @@ newGame.addEventListener('click', function() {
         paper.disabled = false;
         scissors.disabled = false;
     }
+
+    var f = numbRound;
+    if (f === '0') {
+        leftRound.insertAdjacentHTML('afterend', 'eeee');
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+    }
+
+
 });
