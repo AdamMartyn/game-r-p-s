@@ -78,12 +78,20 @@ var parallel = function(playerChoice, computerChoice) {
         resultMsg.innerHTML = 'You won';
         userScore.innerHTML++;
         countRound.innerHTML++;
-        leftRound.innerHTML--;
+        leftRound.innerHTML = --numbRound;
     } else if ((computerChoice === 'paper') && (playerChoice === 'rock') || ((computerChoice === 'rock') && (playerChoice === 'scissors')) || ((computerChoice === 'scissors') && (playerChoice === 'paper'))) {
         resultMsg.innerHTML = 'You lost';
         computerScore.innerHTML++;
         countRound.innerHTML++;
-        leftRound.innerHTML--;
+        leftRound.innerHTML = --numbRund;
+    }
+
+    if (numbRound === 0) {
+        leftRound.innerHTML = 'eeee';
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+        console.log(numbRound);
     }
     //console.log(countRound);
 };
