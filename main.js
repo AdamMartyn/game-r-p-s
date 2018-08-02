@@ -35,16 +35,14 @@ var playerMove = function(playerChoice) {
     var com = computerChoice();
     parallel(playerChoice, com);
 
-    if (numbRound === 0) {
-        var checkFinalResult = function() {
-            if (userScore > computerScore) {
-                document.getElementById('board').classList.add('score-board-green');
-            } else if (userScore < computerScore) {
-                document.getElementById('board').classList.add('score-board-red');
-            }
-        };
-        checkFinalResult();
-    }
+
+
+
+    /*if (numbRound === 0 && userScore > computerScore) {
+        document.getElementById('board').classList.add('score-board-green');
+    } else if (numbRound === 0 && userScore < computerScore) {
+          document.getElementById('board').classList.add('score-board-red');
+    }*/
 };
 
 var computerChoice = function() {
@@ -72,7 +70,7 @@ var parallel = function(playerChoice, computerChoice) {
         resultMsg.innerHTML = 'You lost';
         computerScore.innerHTML++;
         countRound.innerHTML++;
-        // leftRound.innerHTML = --numbRund;
+        leftRound.innerHTML = --numbRound;
     }
 
     if (numbRound === 0) {
@@ -80,7 +78,12 @@ var parallel = function(playerChoice, computerChoice) {
         rock.disabled = true;
         paper.disabled = true;
         scissors.disabled = true;
+        if (userScore > computerScore) {
+            //leftRound.insertAdjacentHTML('beforeend', 'UUUU');
+            document.getElementById('user-label').classList.add('score-board-green');
+        }
     }
+
 };
 
 
@@ -112,4 +115,5 @@ newGame.addEventListener('click', function() {
         paper.disabled = false;
         scissors.disabled = false;
     }
+    console.log(numbRound);
 });
