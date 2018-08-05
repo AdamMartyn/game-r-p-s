@@ -109,10 +109,10 @@ button {
 
 /* use for js */
 
-.score-board-green {
+#user-label.score-board-green {
     background-color: green;
 }
 
-.score-board-red {
+#comuter-label.score-board-red {
     background-color: red;
 }
