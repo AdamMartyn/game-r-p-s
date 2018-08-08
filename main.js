@@ -11,6 +11,8 @@ var paper = document.getElementById('p');
 var scissors = document.getElementById('s');
 var countRound = document.getElementById('round-count');
 var numbRound;
+var computerPoints = 0;
+var userPoints = 0;
 
 
 
@@ -34,9 +36,6 @@ scissors.addEventListener('click', function() {
 var playerMove = function(playerChoice) {
     var com = computerChoice();
     parallel(playerChoice, com);
-
-
-
 
     /*if (numbRound === 0 && userScore > computerScore) {
         document.getElementById('board').classList.add('score-board-green');
@@ -62,13 +61,15 @@ var parallel = function(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         resultMsg.innerHTML = 'it is  draw'
     } else if ((playerChoice === 'paper') && (computerChoice === 'rock') || ((playerChoice === 'rock') && (computerChoice === 'scissors')) || ((playerChoice === 'scissors') && (computerChoice === 'paper'))) {
+        userPoints++;
         resultMsg.innerHTML = 'You won';
-        userScore.innerHTML++;
+        userScore.innerHTML = userPoints;
         countRound.innerHTML++;
         leftRound.innerHTML = --numbRound;
     } else if ((computerChoice === 'paper') && (playerChoice === 'rock') || ((computerChoice === 'rock') && (playerChoice === 'scissors')) || ((computerChoice === 'scissors') && (playerChoice === 'paper'))) {
+        computerPoints++;
         resultMsg.innerHTML = 'You lost';
-        computerScore.innerHTML++;
+        computerScore.innerHTML = computerPoints;
         countRound.innerHTML++;
         leftRound.innerHTML = --numbRound;
     }
@@ -78,9 +79,11 @@ var parallel = function(playerChoice, computerChoice) {
         rock.disabled = true;
         paper.disabled = true;
         scissors.disabled = true;
-        if (userScore > computerScore) {
+        if (userPoints > computerPoints) {
             //leftRound.insertAdjacentHTML('beforeend', 'UUUU');
             document.getElementById('user-label').classList.add('score-board-green');
+        } else {
+            document.getElementById('comuter-label').classList.add('score-board-green');
         }
     }
 
@@ -94,6 +97,8 @@ var reset = function() {
     userScore.innerHTML = 0;
     computerScore.innerHTML = 0;
     countRound.innerHTML = 0;
+    userPoints = 0;
+    computerPoints = 0;
     rock.disabled = false;
     paper.disabled = false;
     scissors.disabled = false;
